@@ -1,0 +1,85 @@
+/* ===== Global Styling ===== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fc;
+}
+
+/* ===== Page Heading ===== */
+h1 {
+    background: #8db7df;
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+    color: black;
+    border-bottom: 3px solid #6b95c3;
+    font-size: 30px;
+}
+
+/* ===== Each Table Block ===== */
+table {
+    width: 90%;
+    margin: 35px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+}
+
+/* ===== Table Heading (Caption) ===== */
+caption h2 {
+    background: #6b95c3;
+    color: white;
+    padding: 12px;
+    font-size: 22px;
+    margin: 0;
+}
+
+/* ===== Table Columns ===== */
+th {
+    background: #8db7df;
+    padding: 15px;
+    font-size: 18px;
+    color: black;
+}
+
+td {
+    padding: 12px;
+    font-size: 16px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Zebra effect */
+tbody tr:nth-child(even) {
+    background: #f2f2f2;
+}
+
+/* Remove <br> line breaks accidentally affecting layout */
+br {
+    display: none;
+}
+
+/* ===== Back Button ===== */
+button {
+    display: block;
+    margin: 40px auto;
+    background: #6b95c3;
+    padding: 12px 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+button:hover {
+    background: #5078a3;
+}
+

@@ -1,0 +1,115 @@
+/* ========== GLOBAL ========== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef3fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Top Heading */
+h1 {
+    text-align: center;
+    background-color: #8fb6d7;
+    color: black;
+    padding: 20px 0;
+    margin: 0;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+
+/* ========= Form box centre ========== */
+form {
+    width: 80%;
+    max-width: 1050px;
+    margin: 40px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.12);
+}
+
+/* ========= SECTION TITLE BAR ========== */
+h2 {
+    background-color: #8fb6d7;
+    width: 90%;
+    margin: 0 auto 30px auto;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* LABELS */
+h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* ========= INPUT BOXES ========== */
+input[type=text],
+input[type=email],
+input[type=number],
+input[type=date],
+input[type=month],
+select,
+textarea {
+    width: 90%;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 15px;
+    border: 1px solid #c7c7c7;
+    margin-bottom: 18px;
+    background: white;
+}
+
+/* 2 Inputs in same row (First + Last Name) */
+input[name="first_name"],
+input[name="last_name"] {
+    width: 90%;
+    margin-right: 2%;
+}
+
+/* Textarea */
+textarea {
+    resize: none;
+}
+
+/* File Input */
+input[type=file] {
+    margin-top: 8px;
+}
+
+/* Radio + Checkbox Labels */
+label {
+    margin-right: 10px;
+    font-size: 15px;
+}
+
+/* Add Buttons */
+button {
+    background-color: #8fb6d7;
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+button:hover {
+    background-color: #7ea4c8;
+}
+
+button a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Certificate & Project Group */
+.input-group {
+    margin-bottom: 20px;
+}
