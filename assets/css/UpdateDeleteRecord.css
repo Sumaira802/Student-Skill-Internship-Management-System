@@ -17,6 +17,18 @@ h1 {
     font-size: 32px;
 }
 
+#Add {
+    background-color: #8db7df;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    border-bottom: none;
+}
+
+label {
+    font-size: larger;
+}
+
 /* ===== Input Box ===== */
 input[type="text"] {
     width: 250px;
@@ -89,5 +101,13 @@ td button:last-child {
 
 td button:last-child:hover {
     background: #b53f3b;
+}
+
+#Delete {
+    background-color: red;
+}
+
+#Delete:hover {
+    background-color: rgb(165, 10, 10);
 }
 

@@ -1,18 +1,6 @@
 <?php
-    $insert = false;
+    include '../Config/db.php';
     if(isset($_POST['email'])){
-        $SERVER = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "student_skills_and_internship_management_system";
-
-
-        $con = mysqli_connect($SERVER, $username, $password, $database);
-
-        if(!$con){
-            die("Connection of this database failed due to ". mysqli_connect_error());
-        }
-        echo "Success connecting to the db";
 
         // Personal Information
         $first_Name = $_POST['first_Name'];
@@ -24,46 +12,63 @@
         $Date_of_Birth = $_POST['Date_of_Birth'];
         $Address = $_POST['Address'];
 
-        $sql = "INSERT INTO `personal_information` (`first_Name`, `last_Name`, `gender`, `email`, `cnic_No`, `Phone_Number`, `Date_of_Birth`, `Address`) VALUES ('$first_Name', '$last_Name', '$gender', '$email', '$cnic_No', '$Phone_Number', '$Date_of_Birth', '$Address');";
+        if($email == "" || $gender == ""){
+            die("Email and gender are required");
+        }
+
+        $sql = "INSERT INTO personal_information (first_Name, last_Name, gender, email, cnic_No, Phone_Number, Date_of_Birth, Address) VALUES ('$first_Name', '$last_Name', '$gender', '$email', '$cnic_No', '$Phone_Number', '$Date_of_Birth', '$Address')";
         // echo $sql;
 
-        if($con->query($sql) == true){
-            $insert = true;
-        }
-        else {
-            echo "ERROR: $sql <br> $con->error";
+        if(!$conn->query($sql)){
+            die("ERROR: $sql <br> $conn->error");
         }
 
-        $student_id = $con->insert_id;
+        $student_id = $conn->insert_id;
 
         // University Information
-        $university_name = $_POST['university_name'];
-        $university_rollNo = $_POST['university_rollNo'];
-        $department = $_POST['department'];
-        $cgpa = $_POST['cgpa'];
-        $passing_year = $_POST['passing_year'];
-        $semester = $_POST['semester'];
+        $university_Name = $_POST['university_Name'];
+        $Roll_No = $_POST['Roll_No'];
+        $Department = $_POST['Department'];
+        $CGPA = $_POST['CGPA'];
+        $Passing_Year = $_POST['Passing_Year'];
+        $Semester = $_POST['Semester'];
 
-        $sql2 = "INSERT INTO `university_information` (`sno`, `university_name`, `university_rollNo`, `department`, `cgpa`, `passing_year`, `semester`) VALUES ('$student_id', '$university_name', '$university_rollNo', '$department', '$cgpa', '$passing_year', '$semester')";
+        $sql2 = "INSERT INTO university_information (sno, university_Name, Roll_No, Department, CGPA, Passing_Year, Semester) VALUES ('$student_id', '$university_Name', '$Roll_No', '$Department', '$CGPA', '$Passing_Year', '$Semester')";
 
-        if($con->query($sql2) == true){
-            $insert = true;
-        }
-        else{
-            echo "ERROR: $sql2 <br> $con->error";
+        if(!$conn->query($sql2)){
+            die("ERROR: $sql2 <br> $conn->error");
         }
         
+
         // Skills Categories
         $Technical_Skills = $_POST['Technical_Skills'];
         $Soft_Skills = $_POST['Soft_Skills'];
 
-        $sql3 = "INSERT INTO `skills_categories` (`sno`, `Technical_Skills`, `Soft_Skills`) VALUES ('$student_id', '$Technical_Skills', '$Soft_Skills')";
+        $sql3 = "INSERT INTO skills_categories (sno, Technical_Skills, Soft_Skills) VALUES ('$student_id', '$Technical_Skills', '$Soft_Skills')";
 
-        if($con->query($sql3) == true){
-            $insert = true;
+        if(!$conn->query($sql3)){
+            die("ERROR: $sql3 <br> $conn->error");
         }
-        else{
-            echo "ERROR: $sql3 <br> $con->error";
+
+        // Certifiicates
+        $Course_Name = $_POST['Course_Name'];
+        $About_Certificate = $_POST['About_Certificate'];
+        $Upload_Certificate = $_FILES['Upload_Certificate']['name'] ?? '';
+
+        $sql4 = "INSERT INTO certificates (sno, Course_Name, About_Certificate, Upload_Certificate) VALUES ('$student_id', '$Course_Name', '$About_Certificate', '$Upload_Certificate')";
+
+        if(!$conn->query($sql4)){
+            die("ERROR: $sql4 <br> $conn->error");
+        }
+
+        $Project_Name = $_POST['Project_Name'];
+        $About_Project = $_POST['About_Project'];
+        $Upload = $_FILES['Upload']['name'] ?? '';
+
+        $sql5 = "INSERT INTO projects (sno, Project_Name, About_Project, Upload) VALUES ('$student_id', '$Project_Name', '$About_Project', '$Upload')";
+
+        if(!$conn->query($sql5)){
+            die("ERROR: $sql5 <br> $conn->error");
         }
 
         // Work Experience
@@ -72,32 +77,26 @@
         $about = $_POST['about'];
         $job_type = $_POST['job_type'];
         
+        $sql6 = "INSERT INTO work_experience (sno, company, position, about, job_type) VALUES ('$student_id', '$company', '$position', '$about', '$job_type')";
 
-        $sql4 = "INSERT INTO `work_experience` (`sno`, `company`, `position`, `about`, `job_type`) VALUES ('$student_id', '$company', '$position', '$about', '$job_type')";
-
-        if($con->query($sql4) == true){
-            $insert = true;
-        }
-        else{
-            echo "ERROR: $sql4 <br> $con->error";
+        if(!$conn->query($sql6)){
+            die("ERROR: $sql6 <br> $conn->error");
         }
 
         // Internship Details
         $Position_Title = $_POST['Position_Title'];
-        $job_Type = $_POST['job_Type'];
+        $Type = $_POST['Type'];
         $Internship_Duration = $_POST['Internship_Duration'];
         $Stipend = $_POST['Stipend'];
 
-        $sql5 = "INSERT INTO `internship_details` (`sno`, `Position_Title`, `job_type`, `Internship_Duration`, `Stipend`) VALUES ('$student_id', '$Position_Title', '$job_Type', '$Internship_Duration', '$Stipend')";
+        $sql7 = "INSERT INTO internship_details (sno, Position_Title, Type, Internship_Duration, Stipend) VALUES ('$student_id', '$Position_Title', '$Type', '$Internship_Duration', '$Stipend')";
 
-        if($con->query($sql5) == true){
-            $insert = true;
-        }
-        else{
-            echo "ERROR: $sql5 <br> $con->error";
+        if(!$conn->query($sql7)){
+            die("ERROR: $sql7 <br> $conn->error");
         }
 
-        $con->close();
+        $insert = true;
+        $conn->close();
 
     }
 
@@ -110,10 +109,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Records</title>
-    <link rel="stylesheet" href="../css/AddRecords.css">
+    <link rel="stylesheet" href="../assets/css/AddRecords.css">
 </head>
 <body>
     <div>
+        <h1 id="Name">Student Skills & Internship Management System</h1><br>
         <h1>Application Form</h1>
         <form action="Create.php" method="POST" enctype="multipart/form-data">
             <!-- Personal Information -->
@@ -124,7 +124,7 @@
             <input type="text" name="last_Name" placeholder="Last Name">
             <h3>Gender</h3>
             <select name="gender">
-            <option value="Select">Select</option>
+            <option value="">Select</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
@@ -143,8 +143,8 @@
             <!-- Academic Information -->
             <h2>University Information</h2>
             <h3>University Name</h3>
-            <select name="university_name">
-            <option value="Select">Select</option>
+            <select name="university_Name">
+            <option value="">Select</option>
             <option value="NUML">NUML</option>
             <option value="FUSST">FUSST</option>
             <option value="NUST">NUST</option>
@@ -155,10 +155,10 @@
             <option value="IIUI">IIUI</option>
             </select>
             <h3>University Roll No</h3>
-            <input type="number" name="university_rollNo" placeholder="Enter Roll No">
+            <input type="number" name="Roll_No" placeholder="Enter Roll No">
             <h3>Department</h3>
-            <select name="department">
-            <option value="Select">Select</option>
+            <select name="Department">
+            <option value="">Select</option>
             <option value="Information Technology">Information Technology</option>
             <option value="Computer Science">Computer Science</option>
             <option value="Software Engineering">Software Engineering</option>
@@ -169,12 +169,12 @@
             <option value="Business Administration">Business Administration</option>
             </select>
             <h3>CGPA</h3>
-            <input type="text" name="cgpa" placeholder="Enter CGPA">
+            <input type="text" name="CGPA" placeholder="Enter CGPA">
             <h3>Passing Year</h3>
-            <input type="month" name="passing_year">
+            <input type="month" name="Passing_Year">
             <h3>Semester</h3>
-            <select name="semester">
-            <option value="Select">Select</option>
+            <select name="Semester">
+            <option value="">Select</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -198,11 +198,11 @@
             <div id="Certificate">
             <div class="input-group">
             <h3>Course Name</h3>
-            <input type="text" name="certificate_name[]" placeholder="Enter course name">
+            <input type="text" name="Course_Name" placeholder="Enter course name">
             <h3>About Certificate</h3>
-            <textarea name="Certificates" placeholder="Enter about certificates" rows="2"></textarea>
+            <textarea name="About_Certificate" placeholder="Enter about certificates" rows="2"></textarea>
             <h3>Upload Certificate</h3>
-            <input type="file" name="certificate_file[]">
+            <input type="file" name="Upload_Certificate">
             </div>
             </div>
             <button type="button" onclick="addCertificate()">+ Add Certificate</button><br>
@@ -212,11 +212,11 @@
             <div id="Projects">
             <div class="input-group">
             <h3>Project Name</h3>
-            <input type="text" name="project_name[]" placeholder="Enter name of project">
+            <input type="text" name="Project_Name" placeholder="Enter name of project">
             <h3>About Project</h3>
-            <textarea name="project_description[]" placeholder="Enter project details" rows="2"></textarea>
+            <textarea name="About_Project" placeholder="Enter project details" rows="2"></textarea>
             <h3>Upload</h3>
-            <input type="file" name="project_file[]">
+            <input type="file" name="Upload">
             </div>
             </div>
             <button type="button" onclick="addProject()">+ Add Project</button><br>
@@ -225,7 +225,7 @@
             <h2>Work Experience</h2>
             <h3>Company</h3>
             <select name="company">
-            <option value="Select">Select</option>
+            <option value="">Select</option>
             <option value="Google">Google</option>
             <option value="Microsoft">Microsoft</option>
             <option value="Amazon">Amazon</option>
@@ -237,7 +237,7 @@
             </select>
             <h3>Position</h3>
             <select name="position">
-            <option value="Select">Select</option>
+            <option value="">Select</option>
             <option value="Web Development">Web Development</option>
             <option value="Data Analyst">Data Analyst</option>
             <option value="App Development">App Development</option>
@@ -256,7 +256,7 @@
             <h2>Internship Details</h2>
             <h3>Position Title</h3>
             <select name="Position_Title">
-            <option value="Select">Select</option>
+            <option value="">Select</option>
             <option value="Web Development">Web Development</option>
             <option value="Data Analyst">Data Analyst</option>
             <option value="App Development">App Development</option>
@@ -266,26 +266,34 @@
             <option value="Ethical Hacking">Ethical Hacking</option>
             <option value="Data Entry">Data Entry</option>
             </select>
-            <h3>Job Type</h3>
-            <textarea name="job_Type" placeholder="Remote or Onsite" rows="1"></textarea>
             <h3>Duration</h3>
             <select name="Internship_Duration">
-            <option value="Select">Select</option>
+            <option value="">Select</option>
             <option value="3 Month">3 Month</option>
             <option value="6 Month">6 Month</option>
             <option value="1 Year">1 Year</option>
             </select>
             <h3>Stipend</h3>
             <textarea name="Stipend" placeholder="Paid or Unpaid" rows="1"></textarea>
+            <h3>Job Type</h3>
+            <textarea name="Type" placeholder="Remote or Onsite" rows="1"></textarea>
 
             <!-- Buttons -->
-            <button type="submit">Submit</button>
+            <button type="submit" type="button">Submit</button>
             <button type="button"><a href="Home Page.html">Back to home</a></button>
         </form>
     </div>
 
     <!-- JS Add More -->
-    <script src=""></script>
+    <script src="../assets/js/script.js"></script>
+
+    <?php if (isset($insert) && $insert === true) { ?>
+    <script>
+        window.location.href = "index.php";
+    </script>
+    <?php } ?>
+
+
 
 </body>
 </html>

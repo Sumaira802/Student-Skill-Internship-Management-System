@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#navbar {
+    background-color: #8fb6d7;
+    height: 11%;
+    width: 70%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: larger;
+    margin-left: 200px;
+    margin-top: 10px;
+    border-bottom: none;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: blue;
+    font-size: larger;
+}
+
+#navbar a:hover {
+    color: rgb(5, 5, 128);
+    background-color: #abc6dd;
+}
