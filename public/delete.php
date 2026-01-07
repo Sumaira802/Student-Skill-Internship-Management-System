@@ -1,35 +1,20 @@
 <?php
     include '../Config/db.php';
 
-    // $sql = "DELETE FROM `personal_information` WHERE `sno` = 1";
-    // $result = mysqli_query($conn, $sql);
-
-    // $aff = mysqli_affected_rows($con);
-    // echo "<br>Number of affected rows: $aff<br>";
-
-    // if($result){
-    //     echo "Delete Successfuly";
-    // }
-    // else{
-    //     $err = mysqli_error($con);
-    //     echo "Not Delete Successfully due to this error --> $err";
-    // }
-
     if(isset($_GET['sno'])){
         $sno = $_GET['sno'];
-        $query = "DELETE FROM personal_information WHERE `sno` = '$sno'";
-        $result = mysqli_query($conn, $query);
-        if(!$result){
-            die("Query failed".mysqli_error());
-        }
-        else{
-            header('location:index.php?delete_msg=You have deleted the record.');
-        }
+
+        mysqli_query($conn, "DELETE FROM university_information WHERE sno = '$sno'");
+        mysqli_query($conn, "DELETE FROM skills_categories  WHERE sno = '$sno'");
+        mysqli_query($conn, "DELETE FROM certificates  WHERE sno = '$sno'");
+        mysqli_query($conn, "DELETE FROM projects  WHERE sno = '$sno'");
+        mysqli_query($conn, "DELETE FROM work_experience  WHERE sno = '$sno'");
+        mysqli_query($conn, "DELETE FROM internship_details  WHERE sno = '$sno'");
+        mysqli_query($conn, "DELETE FROM personal_information  WHERE sno = '$sno'");
+
+        header("Location: index.php?msg=deleted");
+        exit();
+
     }
 ?>
 
-<?php
-    if(isset($_GET['delete_msg'])){
-        echo "<h6>".$_GET['delete_msg']. "</h6>";
-    }
-?>

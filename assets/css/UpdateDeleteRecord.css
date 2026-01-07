@@ -17,12 +17,14 @@ h1 {
     font-size: 32px;
 }
 
+button a {
+    text-decoration: none;
+    color: white;
+}
+
 #Add {
     background-color: #8db7df;
     text-decoration: none;
-    border: none;
-    outline: none;
-    border-bottom: none;
 }
 
 label {
@@ -111,3 +113,22 @@ td button:last-child:hover {
     background-color: rgb(165, 10, 10);
 }
 
+input[type=submit] {
+    background-color: #8fb6d7;
+    padding: 12px 22px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+input[type=submit]:hover {
+    background-color: #7ea4c8;
+}
+
+input[type=submit] {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}

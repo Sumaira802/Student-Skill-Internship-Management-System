@@ -1,6 +1,6 @@
 <?php
     include '../Config/db.php';
-    if(isset($_POST['email'])){
+    if(isset($_POST['submit'])){
 
         // Personal Information
         $first_Name = $_POST['first_Name'];
@@ -94,10 +94,8 @@
         if(!$conn->query($sql7)){
             die("ERROR: $sql7 <br> $conn->error");
         }
-
-        $insert = true;
-        $conn->close();
-
+        header("Location: index.php?msg=added");
+        exit();
     }
 
 ?>
@@ -113,7 +111,6 @@
 </head>
 <body>
     <div>
-        <h1 id="Name">Student Skills & Internship Management System</h1><br>
         <h1>Application Form</h1>
         <form action="Create.php" method="POST" enctype="multipart/form-data">
             <!-- Personal Information -->
@@ -187,7 +184,7 @@
             </select>
 
             <!-- Skills Categories -->
-            <h2>Skills Information</h2>
+            <h2>Skills Categories</h2>
             <h3>Technical Skills</h3>
             <textarea name="Technical_Skills" placeholder="Technical Skills" rows="2"></textarea>
             <h3>Soft Skills</h3>
@@ -279,21 +276,10 @@
             <textarea name="Type" placeholder="Remote or Onsite" rows="1"></textarea>
 
             <!-- Buttons -->
-            <button type="submit" type="button">Submit</button>
+            <button type="submit" name="submit" type="button">Submit</button>
             <button type="button"><a href="Home Page.html">Back to home</a></button>
         </form>
     </div>
-
-    <!-- JS Add More -->
-    <script src="../assets/js/script.js"></script>
-
-    <?php if (isset($insert) && $insert === true) { ?>
-    <script>
-        window.location.href = "index.php";
-    </script>
-    <?php } ?>
-
-
 
 </body>
 </html>

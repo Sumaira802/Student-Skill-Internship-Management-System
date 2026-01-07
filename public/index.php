@@ -13,20 +13,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete * Update Record</title>
     <link rel="stylesheet" href="../assets/css/UpdateDeleteRecord.css">
+
 </head>
 <body>
+    <h1><img src="../assets/images/Logo.png" width="100px" height="50px">Student Skills & Internship Management System</h1><br>
     <h1>Update & Delete Record</h1><br>
-    <button id="Add" type="button"
-        onclick="window.location.href='http://localhost/Student%20Skills%20&%20Internship%20Management%20System/public/Create.php'">
-        Add new Student
-    </button><br>
+    <button id="Add"><a href="Create.php">Add new Student</a></button><br>
     <h2>Total Students: 
-        <?php
-            echo mysqli_num_rows($result);
-        ?>
+    <?php
+        echo mysqli_num_rows($result);
+    ?>
     </h2>
-    <label>Enter Student id</label>
-    <input type="text">
     <table>
         <caption></caption>
         <thead>
@@ -46,10 +43,8 @@
         <tbody>
 
             <?php
-                $query = "SELECT * FROM personal_information";
-                $result = mysqli_query($conn, $query);
                 if(!$result){
-                    die("query failed" .mysqli_error());
+                    die("Query failed: " . mysqli_error($conn));
                 }
                 else{
                     while($row = mysqli_fetch_assoc($result)){
@@ -71,5 +66,6 @@
             ?>
         </tbody>
     </table>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
