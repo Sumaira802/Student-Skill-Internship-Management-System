@@ -17,7 +17,6 @@
         }
 
         $sql = "INSERT INTO personal_information (first_Name, last_Name, gender, email, cnic_No, Phone_Number, Date_of_Birth, Address) VALUES ('$first_Name', '$last_Name', '$gender', '$email', '$cnic_No', '$Phone_Number', '$Date_of_Birth', '$Address')";
-        // echo $sql;
 
         if(!$conn->query($sql)){
             die("ERROR: $sql <br> $conn->error");
